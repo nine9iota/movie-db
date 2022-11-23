@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mongo DB</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+</head>
+<body class="container">
+<header class="section">
+  <h1>Mongo DB</h1>
+</header>
+<main class="section">
+  <h2 class="title">Peoples</h2>
+  <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+    <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <td>Birth Date</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="people : ${peoples}">
+      <td th:text="${people.get('first_name')}"></td>
+      <td th:text="${people.get('last_name')}"></td>
+      <td th:text="${people.get('birth_date')}"></td>
+      <td>
+        <a th:href="${'/people?id='+people.get('_id')}">Delete</a>
+      </td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <form action="/people" method="post">
+      <tr>
+        <td colspan="3">
+          <input class="input" name="first_name" placeholder="First Name">
+          <input class="input" name="last_name" placeholder="Last Name">
+          <input class="input" name="birth_date" type="date" placeholder="Birth Date">
+        </td>
+        <td>
+          <input class="button" type="submit" value="Add">
+        </td>
+      </tr>
+    </form>
+    </tfoot>
+  </table>
+  <h2 class="title">Studios</h2>
+  <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Founded</th>
+      <td>Country</td>
+      <td></td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="studio : ${studios}">
+      <td th:text="${studio.get('name')}"></td>
+      <td th:text="${studio.get('year_founded')}"></td>
+      <td th:text="${studio.get('headquarters').get('country')}"></td>
+      <td>
+        <a th:href="${'/studio?id='+studio.get('_id')}">Delete</a>
+      </td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <form action="/studio" method="post">
+      <tr>
+        <td colspan="3">
+          <input class="input" placeholder="name" name="name">
+          <input class="input" placeholder="year_founded" name="year_founded" type="number" min="1400">
+          <input class="input" placeholder="address" name="address">
+          <input class="input" placeholder="city" name="city">
+          <input class="input" placeholder="state" name="state">
+          <input class="input" placeholder="country" name="country">
+        </td>
+        <td>
+          <input class="button" type="submit" value="Add">
+        </td>
+      </tr>
+    </form>
+    </tfoot>
+  </table>
+  <h2 class="title">Movies</h2>
+  <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+    <thead>
+    <tr>
+      <th>Title</th>
+      <th>Plot</th>
+      <td>imdb Rating</td>
+      <td></td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="movie : ${movies}">
+      <td th:text="${movie.get('title')}"></td>
+      <td th:text="${movie.get('plot')}"></td>
+      <td th:text="${movie.get('imdb').get('rating')}"></td>
+      <td>
+        <a th:href="${'/movie?id='+movie.get('_id')}">Delete</a>
+      </td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <form action="/movie" method="post">
+      <tr>
+        <td colspan="3">
+          <input class="input" placeholder="title" name="title">
+          <input class="input" placeholder="plot" name="plot">
+          <input class="input" placeholder="release_year" name="release_year" type="number" min="1400">
+          <input class="input" placeholder="imdb_rating" name="imdb_rating" type="number">
+          <input class="input" placeholder="imdb_yotes" name="imdb_yotes" type="number">
+          <input class="input" placeholder="imdb_url" name="imdb_url" type="url">
+        </td>
+        <td>
+          <input class="button" type="submit" value="Add">
+        </td>
+      </tr>
+    </form>
+    </tfoot>
+  </table>
+</main>
+</body>
+</html>
